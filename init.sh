@@ -13,6 +13,14 @@ fancy_echo() {
 }
 
 macos_dev_env_init() {
+  # install brew
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+if ! command -v brew >/dev/null; then
+  fancy_echo "Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
 # brew install clashx
 # brew install wireshark
  local apps=(
@@ -38,13 +46,7 @@ linux_dev_env_init() {
 	sdk install java ${jdk8_version}
 }
 
-# install brew
-# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-if ! command -v brew >/dev/null; then
-  fancy_echo "Installing Homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-fi
 
 if test "$(uname)" == 'Darwin'; then
   echo "MacOS detected" 
