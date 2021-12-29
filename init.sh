@@ -36,14 +36,20 @@ fi
 }
 
 linux_dev_env_init() {
+  source "$HOME/.bashrc"
 	if ! command -v sdk > /dev/null; then
 		curl -s "https://get.sdkman.io" | bash
 		source "$HOME/.sdkman/bin/sdkman-init.sh"
+    source "$HOME/.bashrc"
 		echo "$(sdk version)"
+   
 	fi			
 	# install java
 	jdk8_version=$(sdk list java | grep -E '8.*zulu' | head -n 1 | awk '{print $NF}')
+  echo "install java $jdk8_version"
 	sdk install java ${jdk8_version}
+  sdk use java ${jdk8_version}
+  exec bash --login
 }
 
 
